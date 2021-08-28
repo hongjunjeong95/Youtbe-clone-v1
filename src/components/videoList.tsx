@@ -1,10 +1,11 @@
 import React, { memo } from "react";
 import { useQuery } from "react-query";
 import { videosApi } from "../services/videoService";
+import { FormError } from "./form-error";
 import VideoItem from "./videoItem";
 
 const VideoList = memo(() => {
-  const { data, status, error } = useQuery(
+  const { data, status, error, isLoading } = useQuery(
     "most_popular_videos",
     videosApi.mostPopularVideos
   );
@@ -14,12 +15,15 @@ const VideoList = memo(() => {
 
   return (
     <div className="grid">
-      {status === "loading"
+      {isLoading
         ? "Loading..."
         : items.length !== 0 &&
           items.map((item: any) => (
             <VideoItem key={item.id} title={item.snippet.title} />
           ))}
+      {status === "error" && error instanceof Error && (
+        <FormError errorMessage={error?.message} />
+      )}
     </div>
   );
 });
