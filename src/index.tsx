@@ -6,6 +6,7 @@ import { HelmetProvider } from "react-helmet-async";
 
 import reportWebVitals from "./reportWebVitals";
 import App from "./App";
+import "./styles/styles.css";
 
 dotenv.config();
 
