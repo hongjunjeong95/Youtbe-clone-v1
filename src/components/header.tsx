@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Header = memo(() => {
   return (
-    <div>
+    <div className="bg-black text-white w-full">
       <img src="" alt="" />
       <Link to="/">Youtube</Link>
       <form action="#">

@@ -5,7 +5,7 @@ import VideoList from "../components/videoList";
 
 const Home = memo(() => {
   return (
-    <div>
+    <div className="flex flex-col justify-center items-center">
       <Helmet>
         <title>Home</title>
       </Helmet>

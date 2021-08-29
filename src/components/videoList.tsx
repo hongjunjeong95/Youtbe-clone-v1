@@ -14,17 +14,24 @@ const VideoList = memo(() => {
   console.log(data);
 
   return (
-    <div className="grid">
-      {isLoading
-        ? "Loading..."
-        : items.length !== 0 &&
-          items.map((item: any) => (
-            <VideoItem key={item.id} title={item.snippet.title} />
-          ))}
+    <>
+      <div className="grid grid-cols-2 gap-2">
+        {isLoading
+          ? "Loading..."
+          : items.length !== 0 &&
+            items.map((item: any) => (
+              <VideoItem
+                key={item.id}
+                title={item.snippet.title}
+                url={item.snippet.thumbnails.medium.url}
+                author={item.snippet.channelTitle}
+              />
+            ))}
+      </div>
       {status === "error" && error instanceof Error && (
         <FormError errorMessage={error?.message} />
       )}
-    </div>
+    </>
   );
 });
 
