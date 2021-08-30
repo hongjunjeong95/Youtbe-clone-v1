@@ -7,14 +7,7 @@ const VideoDetail = memo(() => {
 
   const {
     //@ts-ignore
-    snippet: {
-      title,
-      thumbnails: {
-        medium: { url },
-      },
-      channelTitle,
-      description,
-    },
+    snippet: { title, channelTitle, description },
   } = video;
 
   return (
@@ -22,6 +15,7 @@ const VideoDetail = memo(() => {
       <iframe
         width="100%"
         height="500px"
+        title="Youtube video"
         src={`https://www.youtube.com/embed/${video?.id}`}
         frameBorder="0"
         allowFullScreen
