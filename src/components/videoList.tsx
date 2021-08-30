@@ -1,36 +1,18 @@
 import React, { memo } from "react";
-import { useQuery } from "react-query";
-import { videosApi } from "../services/videoService";
-import { FormError } from "./form-error";
+import { useRecoilValue } from "recoil";
+import { videoAtom } from "../atoms/video.atom";
 import VideoItem from "./videoItem";
 
 const VideoList = memo(() => {
-  const { data, status, error, isLoading } = useQuery(
-    "most_popular_videos",
-    videosApi.mostPopularVideos
-  );
-
-  const items = data?.data.items;
-  console.log(data);
+  const videos = useRecoilValue(videoAtom);
 
   return (
     <>
       <div className="grid grid-cols-2 gap-2">
-        {isLoading
-          ? "Loading..."
-          : items.length !== 0 &&
-            items.map((item: any) => (
-              <VideoItem
-                key={item.id}
-                title={item.snippet.title}
-                url={item.snippet.thumbnails.medium.url}
-                author={item.snippet.channelTitle}
-              />
-            ))}
+        {videos.map((video: any) => (
+          <VideoItem key={video.id} video={video} />
+        ))}
       </div>
-      {status === "error" && error instanceof Error && (
-        <FormError errorMessage={error?.message} />
-      )}
     </>
   );
 });

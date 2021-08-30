@@ -1,19 +1,40 @@
 import axios from "axios";
 
-const api = axios.create({
-  baseURL: "https://youtube.googleapis.com/youtube/v3/",
-  params: {
-    key: process.env.REACT_APP_YOUTUBE_API_KEY,
-    part: "snippet",
-  },
-});
+class Youtube {
+  private readonly url = "https://youtube.googleapis.com/youtube/v3/";
+  constructor(private readonly youtubeApiKey: string) {}
 
-export const videosApi = {
-  mostPopularVideos: () =>
-    api.get("videos", {
+  private readonly api = axios.create({
+    baseURL: this.url,
+    params: {
+      key: this.youtubeApiKey,
+      part: "snippet",
+    },
+  });
+
+  async mostPopularVideos() {
+    const response = await this.api.get("videos", {
       params: {
         chart: "mostPopular",
         maxResults: 25,
       },
-    }),
-};
+    });
+
+    const result = response.data;
+    return result.items;
+  }
+
+  async searchVideos(query: string) {
+    const response = await this.api.get("search", {
+      params: {
+        q: query,
+        maxResults: 25,
+      },
+    });
+
+    const result = response.data;
+    return result.items;
+  }
+}
+
+export default Youtube;

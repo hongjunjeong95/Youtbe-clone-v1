@@ -1,13 +1,20 @@
 import React, { memo } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as BRouter, Route, Switch } from "react-router-dom";
 import Home from "../pages/home";
+import Youtube from "../services/videoService";
 
-export default memo(() => {
+interface IRouterProps {
+  youtube: Youtube;
+}
+
+const Router: React.FC<IRouterProps> = memo(({ youtube }) => {
   return (
-    <Router>
+    <BRouter>
       <Switch>
-        <Route path="/" component={Home}></Route>
+        <Route path="/" component={() => <Home youtube={youtube} />}></Route>
       </Switch>
-    </Router>
+    </BRouter>
   );
 });
+
+export default Router;
