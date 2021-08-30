@@ -11,7 +11,7 @@ const VideoList = memo(() => {
     <>
       <ul
         className={`${
-          !!selectedVideo.id ? "video_list" : "grid grid-cols-2 gap-2"
+          !!selectedVideo ? "video_list" : "grid grid-cols-2 gap-2"
         }`}
       >
         {videos.map((video: any) => (

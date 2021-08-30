@@ -36,7 +36,7 @@ const Home: React.FC<IRouterProps> = memo(({ youtube }) => {
         "Loading..."
       ) : (
         <div className="flex w-full">
-          {!!selectedVideo.id && <VideoDetail />}
+          {selectedVideo && <VideoDetail />}
           <VideoList />
         </div>
       )}

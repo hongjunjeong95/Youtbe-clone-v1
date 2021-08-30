@@ -4,7 +4,9 @@ import { selectedVideoAtom } from "../atoms/video.atom";
 
 const VideoDetail = memo(() => {
   const video = useRecoilValue(selectedVideoAtom);
+
   const {
+    //@ts-ignore
     snippet: {
       title,
       thumbnails: {
@@ -14,13 +16,13 @@ const VideoDetail = memo(() => {
       description,
     },
   } = video;
+
   return (
     <section className="video_detail">
-      {" "}
       <iframe
         width="100%"
         height="500px"
-        src={`https://www.youtube.com/embed/${video.id}`}
+        src={`https://www.youtube.com/embed/${video?.id}`}
         frameBorder="0"
         allowFullScreen
       ></iframe>

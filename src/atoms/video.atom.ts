@@ -6,17 +6,7 @@ export const videoAtom = atom<object[]>({
   default: [],
 });
 
-export const selectedVideoAtom = atom<IVideo>({
+export const selectedVideoAtom = atom<IVideo | null>({
   key: "selectedVideoAtom",
-  default: {
-    id: "",
-    snippet: {
-      title: "",
-      thumbnails: {
-        medium: { url: "" },
-      },
-      channelTitle: "",
-      description: "",
-    },
-  },
+  default: null,
 });

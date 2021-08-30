@@ -2,7 +2,7 @@ import React, { memo, useRef, useState } from "react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
-import { videoAtom } from "../atoms/video.atom";
+import { selectedVideoAtom, videoAtom } from "../atoms/video.atom";
 import Youtube from "../services/videoService";
 
 interface IHeaderProps {
@@ -13,10 +13,14 @@ const Header: React.FC<IHeaderProps> = memo(({ youtube }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [query, setQuery] = useState<string>("");
   const setVideos = useSetRecoilState(videoAtom);
+  const selectedVideo = useSetRecoilState(selectedVideoAtom);
 
   useQuery(["search_videos"], () => youtube.searchVideos(query), {
     onError: (error) => console.log(error),
-    onSuccess: (data) => setVideos(data),
+    onSuccess: (data) => {
+      setVideos(data);
+      selectedVideo(null);
+    },
     enabled: !!query,
   });
 
