@@ -6,11 +6,10 @@ import { videoAtom } from "../atoms/video.atom";
 import Youtube from "../services/videoService";
 
 interface IHeaderProps {
-  onSearch: Function;
   youtube: Youtube;
 }
 
-const Header: React.FC<IHeaderProps> = memo(({ onSearch, youtube }) => {
+const Header: React.FC<IHeaderProps> = memo(({ youtube }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [query, setQuery] = useState<string>("");
   const setVideos = useSetRecoilState(videoAtom);
@@ -23,7 +22,6 @@ const Header: React.FC<IHeaderProps> = memo(({ onSearch, youtube }) => {
 
   const handleSearch = () => {
     setQuery(inputRef.current?.value ?? "");
-    onSearch(query);
   };
 
   const onClick = () => {

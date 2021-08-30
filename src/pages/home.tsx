@@ -17,12 +17,6 @@ const Home: React.FC<IRouterProps> = memo(({ youtube }) => {
   const setVideos = useSetRecoilState(videoAtom);
   const selectedVideo = useRecoilValue(selectedVideoAtom);
 
-  const onSearch = (query: string) => {
-    youtube
-      .searchVideos(query) //
-      .then((videos) => setVideos(videos));
-  };
-
   const { isLoading, error, status } = useQuery(
     ["most_popular_videos"],
     () => youtube.mostPopularVideos(),
@@ -37,7 +31,7 @@ const Home: React.FC<IRouterProps> = memo(({ youtube }) => {
       <Helmet>
         <title>Home</title>
       </Helmet>
-      <Header onSearch={onSearch} youtube={youtube} />
+      <Header youtube={youtube} />
       {isLoading ? (
         "Loading..."
       ) : (
