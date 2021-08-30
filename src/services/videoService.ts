@@ -33,7 +33,7 @@ class Youtube {
     });
 
     const result = response.data;
-    return result.items;
+    return result.items.map((item: any) => ({ ...item, id: item.id.videoId }));
   }
 }
 

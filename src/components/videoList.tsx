@@ -8,11 +8,11 @@ const VideoList = memo(() => {
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-2">
+      <ul className="grid grid-cols-2 gap-2">
         {videos.map((video: any) => (
           <VideoItem key={video.id} video={video} />
         ))}
-      </div>
+      </ul>
     </>
   );
 });
